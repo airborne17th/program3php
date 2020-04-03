@@ -1,0 +1,32 @@
+:root{
+    font-family: 'Montserrat', sans-serif;
+}
+#headerBanner{
+    margin-bottom: 0;
+    background-image: url("img/banner_bg.jpg");
+    background-repeat: no-repeat, repeat;
+    background-position: center;
+    background-color: #0a2463;
+    color: black;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+.authorImg{
+    text-align: center;
+}
+.leaderboard{
+    list-style: none;
+}
+.nav-item{
+    background-color: #cdedf6;
+    border-radius: 1rem;
+    border-style: solid;
+    border-color: #131916;
+    text-align: center;
+}
+.nav-item a{
+    color: black;
+}
+#topNav{
+    background-color: #5eb1bf;
+}
