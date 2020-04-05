@@ -1,7 +1,7 @@
 <?php
 require('../model/database.php');
-require('../model/user.php');
-require('../model/user_db.php');
+require('../model/player.php');
+require('../model/player_db.php');
 session_start();
 $action = filter_input(INPUT_POST, 'action');
 if ($action === NULL) {
@@ -11,19 +11,19 @@ if ($action === NULL) {
     }
 }
 switch ($action) {
-    case 'list_users':
-        $users = UserDB::getUsers();
-        include('users_directory.php');
+    case 'list_players':
+        $players = PlayerDB::getPlayers();
+        include('player_directory.php');
         break;
     case 'registration':
         include('registration.php');
         break;
-    case 'add_user':
+    case 'add_player':
         // Fetch the data from the registration attempt
         $first_name = filter_input(INPUT_POST, 'first_name');
         $last_name = filter_input(INPUT_POST, 'last_name');
         $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
-        $userTest = filter_input(INPUT_POST, "newuser");
+        $playerTest = filter_input(INPUT_POST, "newplayer");
         $passTest = filter_input(INPUT_POST, "newpass");
         
         // Values used for validation
@@ -31,24 +31,24 @@ switch ($action) {
         $isValid = true;
 
         // Validate the inputs
-        if (empty($first_name) || empty($last_name) || empty($userTest) || empty($passTest) ||
+        if (empty($first_name) || empty($last_name) || empty($playerTest) || empty($passTest) ||
             $email === NULL || $email === false) {
-                $error_message = "Invalid user data! Check all fields and try again.";
+                $error_message = "Invalid player data! Check all fields and try again.";
                 $isValid = false;
             } else {
             $isValid = true;
             }
         
         // Regex validation
-        if (preg_match('/^[A-Za-z]/', $userTest)) {
+        if (preg_match('/^[A-Za-z]/', $playerTest)) {
             } else {
-            $error_message = "User must start with a letter.";
+            $error_message = "Player must start with a letter.";
             $isValid = false;
             }
 
-        if (preg_match('/^[a-zA-Z\d_-]{4,30}$/', $userTest)) {
+        if (preg_match('/^[a-zA-Z\d_-]{4,30}$/', $playerTest)) {
             } else {
-                $error_message = "User must be within 4 to 30 characters in length. Username cannot have special characters (@$!%*?&).";
+                $error_message = "player must be within 4 to 30 characters in length. playername cannot have special characters (@$!%*?&).";
                 $isValid = false;
             }
         
@@ -76,17 +76,17 @@ switch ($action) {
                 $isValid = false;
             }
 
-            $userResult = UserDB::duplicateUser($userTest);
-        // Test for duplicate username
-        if ($userResult > 0)
+            $playerResult = playerDB::duplicateplayer($playerTest);
+        // Test for duplicate playername
+        if ($playerResult > 0)
             {
-                $error_message = "Username in use.";
+                $error_message = "playername in use.";
                 $isValid = false;
             } else {
 
             }
 
-            $emailResult = UserDB::duplicateEmail($email);
+            $emailResult = playerDB::duplicateEmail($email);
             // Test for duplicate e-mail
             if ($emailResult > 0)
                 {
@@ -99,14 +99,14 @@ switch ($action) {
         if($isValid == true) {
             // Make the password being tested the final password
             $password = $passTest;
-            $user_name = $userTest;
-            // Create the Session to validate the user is logged in and track name
-            $_SESSION["user_name"] = $user_name;
+            $player_name = $playerTest;
+            // Create the Session to validate the player is logged in and track name
+            $_SESSION["player_name"] = $player_name;
             // Hash it for the server and pass it back to the password
             $hash = password_hash ( $password , PASSWORD_BCRYPT );
             $password = $hash;
-            $i = new User($first_name, $last_name, $email, $user_name, $password);
-            UserDB::addUser($i);
+            $i = new Player($first_name, $last_name, $email, $player_name, $password);
+            PlayerDB::addPlayer($i);
             include('confirmation.php');
         } else {
             include('registration.php');
@@ -120,9 +120,9 @@ switch ($action) {
         $isValid = true;
         $hash = "!";
         $loginerror_message = "";
-        $user_entry = filter_input(INPUT_POST, 'user_entry');
+        $player_entry = filter_input(INPUT_POST, 'player_entry');
         $password_entry = filter_input(INPUT_POST, 'password_entry');
-        $hashed_password = UserDB::authenticationUser($user_entry);
+        $hashed_password = playerDB::authenticationplayer($player_entry);
         if (isset($hashed_password[0])) {
             $hash = $hashed_password[0];
             trim($hash); 
@@ -133,16 +133,16 @@ switch ($action) {
             $isValid = true;
         } else {
             $isValid = false;
-            $loginerror_message = "Login Failed. Check username or password.";
+            $loginerror_message = "Login Failed. Check playername or password.";
         } 
 
-        if (isset($_SESSION["user_name"]) && $_SESSION["user_name"] !== "!"){
+        if (isset($_SESSION["player_name"]) && $_SESSION["player_name"] !== "!"){
             $isValid = false;
             $loginerror_message = "Login Failed. Already logged in.";
         }
 
         if ($isValid == true) {
-            $_SESSION["user_name"] = $user_entry;
+            $_SESSION["player_name"] = $player_entry;
             $loginerror_message = "Login Success!";
             include('login.php');
         } else {
@@ -156,50 +156,50 @@ switch ($action) {
        include('login.php');
        break;
     case 'profile' :
-        $user_message = '';
+        $player_message = '';
         $pass_message = '';
         $email_message = '';
-        if(isset($_SESSION["user_name"])){
+        if(isset($_SESSION["player_name"])){
 
         } else {
-            // This can never be set by a user naturally with the regex.
-            $_SESSION["user_name"] = "!";
+            // This can never be set by a player naturally with the regex.
+            $_SESSION["player_name"] = "!";
         }
 
-        $user = $_SESSION["user_name"];
+        $player = $_SESSION["player_name"];
 
-        if (is_null($user)){
+        if (is_null($player)){
             $error_message = "Not a member? Sign up here!";;
             include('registration.php');
         } 
 
-        if ($user === "!")
+        if ($player === "!")
         {
             $error_message = "Not a member? Sign up here!";
             include('registration.php');
         } else {
-            $user_display = $_SESSION["user_name"];
-            include('userprofile.php');
+            $player_display = $_SESSION["player_name"];
+            include('playerprofile.php');
         }
     break;
-    case 'changeUser' :
-        $oldUser = $_SESSION["user_name"];
-        $userTest = filter_input(INPUT_POST, "newuser");
-        $userResult = UserDB::duplicateUser($userTest);
-        // Test for duplicate username
-        if ($userResult > 0)
+    case 'changeplayer' :
+        $oldplayer = $_SESSION["player_name"];
+        $playerTest = filter_input(INPUT_POST, "newplayer");
+        $playerResult = playerDB::duplicateplayer($playerTest);
+        // Test for duplicate playername
+        if ($playerResult > 0)
             {
-                $user_message = "Username in use.";
+                $player_message = "playername in use.";
             } else {
-                $newUser = $userTest;
-                $user_message = "Username successfully updated.";
-                UserDB::changeUser($newUser, $oldUser);
-                $_SESSION["user_name"] = $newUser;
+                $newplayer = $playerTest;
+                $player_message = "playername successfully updated.";
+                playerDB::changeplayer($newplayer, $oldplayer);
+                $_SESSION["player_name"] = $newplayer;
             }
         $pass_message = '';
         $email_message = '';
-        $user_display = $_SESSION["user_name"];
-        include('userprofile.php');
+        $player_display = $_SESSION["player_name"];
+        include('playerprofile.php');
     break;   
     case 'changePassword' :
         $passTest = filter_input(INPUT_POST, "newpass");
@@ -232,69 +232,31 @@ switch ($action) {
         if ($isValid == true) {
             $password = $passTest;
             $hash = password_hash ( $password , PASSWORD_BCRYPT );
-            $user = $_SESSION["user_name"];
-            UserDB::changePassword($hash, $user);
+            $player = $_SESSION["player_name"];
+            playerDB::changePassword($hash, $player);
             $pass_message = "Password successfully updated";
         } 
-        $user_message = '';
+        $player_message = '';
         $email_message = '';
-        $user_display = $_SESSION["user_name"];
-        include('userprofile.php');
+        $player_display = $_SESSION["player_name"];
+        include('playerprofile.php');
         break;
     case 'changeEmail' :
             $emailTest = filter_input(INPUT_POST, "newemail");
-            $emailResult = UserDB::duplicateEmail($emailTest);
+            $emailResult = playerDB::duplicateEmail($emailTest);
             if ($emailResult > 0)
             {
             $email_message = "E-mail in use.";
             } else {
             $newEmail = $emailTest;
-            $user = $_SESSION["user_name"];
+            $player = $_SESSION["player_name"];
             $email_message = "E-mail successfully updated.";
-            UserDB::changeEmail($newEmail, $user);
+            playerDB::changeEmail($newEmail, $player);
             }
             $pass_message = '';
-            $user_message = '';
-            $user_display = $_SESSION["user_name"];
-            include('userprofile.php');
+            $player_message = '';
+            $player_display = $_SESSION["player_name"];
+            include('playerprofile.php');
         break;        
-
-
-//    case 'uploadImage' :
-//        // array_unique (use this function to enforce unique values for user images.
-//        // if (empty($_FILE['image']) == true)
-//        // use default.jpg
-//        // TO DO: Add the default value of the filename to the column in SQL. 
-//        isValid = true; 
-//   
-//   if(isset($_FILES['image'])){
-//    $errors= array();
-//    $file_name = $_FILES['image']['name'];
-//    $file_size =$_FILES['image']['size'];
-//    $file_tmp =$_FILES['image']['tmp_name'];
-//    $file_type=$_FILES['image']['type'];
-//    $temp = $_FILES['image']['name'];
-//    $temp = explode('.', $temp);
-//    $temp = end($temp);
-//    $file_ext = strtolower($temp);
-//    
-//    var_dump($_FILES);
-//    
-//    $extensions= array("jpeg","jpg","png", "gif");
-//    
-//    if(in_array($file_ext,$extensions)=== false){
-//       $errors[]="file extension not in whitelist: " . join(',',$extensions);
-//    }
-//        if(isValid == true) {
-//            $_FILE['image'] = $image;
-//            $_SESSION["userID"] = $user_id;
-//            UserDB::uploadImage($user_id, $image);
-//        }
-//    if(empty($errors)==true){
-//       move_uploaded_file($file_tmp,"existingDir/".$file_name);
-//       echo "Success";
-//    }else{
-//        var_dump($errors);
-//    }
 }
 ?>

@@ -1,5 +1,5 @@
 <?php
-$the_title = "Confirmation";
+$the_title = "SC | Confirmation";
 $pathcor = "../";
 require_once '../view/header.php';
 ?>
@@ -10,7 +10,7 @@ require_once '../view/header.php';
             <p>First Name: <?php echo $first_name; ?></p>
             <p>Last Name: <?php echo $last_name; ?></p>
             <p>Email: <?php echo $email; ?></p>
-            <p>Username: <?php echo $user_name; ?></p>
+            <p>Player Name: <?php echo $player_name; ?></p>
             <p>Password: <?php echo $passTest; ?></p>
      </main>
     </body>

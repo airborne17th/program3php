@@ -1,6 +1,6 @@
 <?php
 
-$the_title = "SCC Social Media | Login";
+$the_title = "SC | Login";
 $pathcor = "../";
 
 require_once '../view/header.php'; ?>
@@ -16,7 +16,7 @@ require_once '../view/header.php'; ?>
                 <span class="error"><?php echo $loginerror_message ?></span>
                 <br><br>
                 <i class="far fa-address-card fa-2x"></i>
-                <input type="text" placeholder="Username" name="user_entry" value="">
+                <input type="text" placeholder="Player Name" name="player_entry" value="">
                 <i class="fas fa-key fa-2x"></i>
                 <input type="text" placeholder="Password" name="password_entry" value="">
                 <input type="submit" name="submit" value="Sign in!"><br>
