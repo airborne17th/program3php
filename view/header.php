@@ -1,20 +1,36 @@
-<?php
-$basedir= dirname(__DIR__);
-$basedir = explode("\\", $basedir);
-$basedir = array_pop($basedir);
-
-//array_pop(explode("\\", dirname(__DIR__))) 
-?>
 <!DOCTYPE html>
-<html>
-
-<!-- the head section -->
-<head>
-    <title>SportsPro Technical Support</title>
-    <link rel="stylesheet" type="text/css"
-	
-          href="/<?php echo htmlspecialchars($basedir) ?>/main.css">
-			<!--- THIS PATH WILL BREAK ON LINUX/OSX 
-		replace "\\" with "//"
-		-->
-</head>
+<html lang="en">
+    <!-- The head -->
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="<?php echo $pathcor; ?>style.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <link rel="icon" href="<?php echo $pathcor; ?>im/browser.png">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+        <script src="https://kit.fontawesome.com/80c1c40743.js" crossorigin="anonymous"></script>
+        <title><?php echo $the_title; ?></title>
+    </head>
+    <!-- The body -->
+<body>
+  <main>
+    <div class="jumbotron text-center" id="headerBanner">
+      <h1>Smash Central</h1>
+      <p>Play, learn and laugh with a social and competitive group of players.</p> 
+        <nav>
+          <ul>
+                    <li class="nav-item active"><a href="<?php echo $pathcor; ?>index.php">Home</a></li>
+                    <li class="nav-item active"><a href="<?php echo $pathcor; ?>player_manager?action=list_players">Player List</a></li>
+                    <li class="nav-item active"><a href="<?php echo $pathcor; ?>char_manager?action=list_chars">Characters</a></li>
+                    <li class="nav-item active"><a href="<?php echo $pathcor; ?>match_manager?action=list_matches">Match Record</a></li>
+                    <li class="nav-item active"><a href="<?php echo $pathcor; ?>match_manager?action=record_match">Record Match Result</a></li>
+                    <li class="nav-item active"><a href="<?php echo $pathcor; ?>about">About</a></li>
+                    <li class="nav-item active"><a href="<?php echo $pathcor; ?>player_manager?action=profile">Profile</a></li>
+                    <li class="nav-item active"><a href="<?php echo $pathcor; ?>player_manager?action=registration">Registration</a></li>
+                    <li class="nav-item active"><a href="<?php echo $pathcor; ?>player_manager?action=login_initial">Login</a></li>
+                </ul>
+        </nav>
+      </div>
+        
