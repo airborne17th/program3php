@@ -1,6 +1,6 @@
 <!-- set per page -->
 <?php
-$the_title = "Character Directory";
+$the_title = " SC | Character Directory";
 $pathcor = "../";
 
 require_once '../view/header.php';
