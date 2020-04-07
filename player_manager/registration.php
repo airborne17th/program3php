@@ -29,8 +29,8 @@ if (!isset($error_message)) {
         <input type="text" name="last_name" placeholder="Enter your last name"><br> 
         <label>E-mail: </label>
         <input type="text" name="email" placeholder="Enter your e-mail"><br> 
-        <label>playername: </label>
-        <input type="text" name="newplayer" placeholder="Create playername"><br>
+        <label>Player Name: </label>
+        <input type="text" name="newplayer" placeholder="Create player name"><br>
         <label>Password: </label>
         <input type="text" name="newpass" placeholder="Create password"><br> 
         <label>&nbsp;</label>

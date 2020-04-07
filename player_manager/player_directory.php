@@ -13,14 +13,20 @@ require_once '../view/header.php';
         <table>
             <tr>
                 <th>Name</th>
-                <th>Player Name</th>
-                <th>Email</th>
+                <th>Player</th>
+                <th>Email</th>                
+                <th>Wins</th>
+                <th>Losses</th>
+                <th>Total Games</th>
             </tr>
             <?php foreach ($players as $player) : ?>
                 <tr>
                     <td><?php echo htmlspecialchars($player->getFullName()); ?></td>
                     <td><?php echo htmlspecialchars($player->getPlayerName()); ?></td>
                     <td><?php echo htmlspecialchars($player->getEmail()); ?></td>
+                    <td><?php echo htmlspecialchars($player->getWin()); ?></td>
+                    <td><?php echo htmlspecialchars($player->getLoss()); ?></td>
+                    <td><?php echo htmlspecialchars($player->getTotal()); ?></td>
                 </tr>
             <?php endforeach; ?>
         </table>

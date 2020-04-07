@@ -1,0 +1,18 @@
+.nav-item{
+    background-color: #cdedf6;
+    border-radius: 1rem;
+    border-style: solid;
+    border-color: #131916;
+    text-align: center;
+    list-style: none;
+}
+.nav-item active {
+    list-style: none;
+}
+.nav-item a{
+    color: black;
+}
+#topNav{
+    background-color: #5eb1bf;
+    list-style: none;
+}

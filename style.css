@@ -9,7 +9,11 @@
     background-color: #0a2463;
     color: black;
     font-weight: bold;
-    font-size: 1.5rem;
+    font-size: 1rem;
+} 
+nav{
+    list-style: none;
+    list-style-type: none;
 }
 .authorImg{
     text-align: center;
@@ -23,10 +27,88 @@
     border-style: solid;
     border-color: #131916;
     text-align: center;
+    list-style: none;
 }
 .nav-item a{
     color: black;
 }
-#topNav{
-    background-color: #5eb1bf;
+
+table{
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
 }
+
+td{
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+    text-align: center;
+}
+
+.users img{
+    width: 25%;
+    border-radius: 50%;
+  }
+
+  .error{
+    color: red;
+    font-weight: bold;
+}
+
+.box{
+	width: 300px;
+  padding: 40px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+	background: none;
+	text-align: center;
+}
+
+.box h1{
+	color: white;
+	font-weight: 500;	
+}
+
+.box input[type = "text"],.box input[type = "password"]{
+	border: 0;
+	background: white;
+	display: block;
+	margin: 20px auto;
+	text-align: center;
+	border: 3px solid #03256C;
+	padding: 14px 10px;
+	width: 200px;
+	outline: none;
+	color: black;
+	border-radius: 25px;
+	transition: 0.25s;
+}
+
+.box input[type = "text"]:focus,.box input[type = "password"]:focus{
+	width: 300px;
+	border-color: #494884;
+}
+
+.box input[type = "submit"]{
+	font-family: "montserrat", sans-serif;
+	border: 0;
+	background: white;
+	display: block;
+	margin: 20px auto;
+	text-align: center;
+	border: 3px solid #03256C;
+	padding: 14px 10px;
+	width: 200px;
+	outline: none;
+	color: black;
+	border-radius: 25px;
+	transition: 0.25s;
+	cursor: pointer;
+}
+
+.box input[type = "submit"]:hover{
+	background: #78a1bb;
+}
+

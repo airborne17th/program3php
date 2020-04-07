@@ -2,18 +2,22 @@
 require('../model/database.php');
 require('../model/player.php');
 require('../model/player_db.php');
+require('../model/match.php');
+require('../model/match_db.php');
+require('../model/char.php');
+require('../model/char_db.php');
 session_start();
 $action = filter_input(INPUT_POST, 'action');
 if ($action === NULL) {
     $action = filter_input(INPUT_GET, 'action');
     if ($action === NULL) {
-        $action = 'registration';
+        $action = 'match_records';
     }
 }
 switch ($action) {
-    case 'list_players':
-        $players = PlayerDB::getPlayers();
-        include('player_directory.php');
+    case 'match_records':
+        $players = MatchDB::getMatches();
+        include('match_records.php');
         break;
     case 'registration':
         include('registration.php');
