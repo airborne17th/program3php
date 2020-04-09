@@ -22,8 +22,8 @@ nav{
     list-style: none;
 }
 .nav-item{
-    background-color: #cdedf6;
-    border-radius: 1rem;
+    background-color: #C3C4B2;
+    border-radius: 0.5rem;
     border-style: solid;
     border-color: #131916;
     text-align: center;
@@ -40,6 +40,13 @@ table{
 }
 
 td{
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+    text-align: center;
+}
+
+th{
     border-style: solid;
     border-width: 1px;
     border-color: black;

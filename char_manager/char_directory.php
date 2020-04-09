@@ -5,10 +5,6 @@ $pathcor = "../";
 
 require_once '../view/header.php';
 ?>
-
-
-<main>
-
     <section>
         <table>
             <tr>
@@ -27,5 +23,4 @@ require_once '../view/header.php';
             <?php endforeach; ?>
         </table>
     </section>
-</main>
 <?php require_once '../view/footer.php'; ?>       

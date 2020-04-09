@@ -17,7 +17,7 @@ if (!isset($error_message)) {
         <main>
         <h1>Registration</h1>
         <h2>Please fill out each box below to create your account.</h2>
-        <p>Note that your playername. Must be within 4 to 30 characters in length. playername cannot have special characters (@$!%*?&). <br>
+        <p>Player name must be within 4 to 30 characters in length. Player name cannot have special characters (@$!%*?&). <br>
         Password guidelines: Password must have the following, an upper case letter, lower case letter, a digit and a special character. 
         Password must be at least 12 characters long.</p>
     <form action="." method="post">

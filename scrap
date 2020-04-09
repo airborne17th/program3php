@@ -16,3 +16,35 @@
     background-color: #5eb1bf;
     list-style: none;
 }
+
+$valid_player1 = MatchDB::authenticationPlayer($player1_ID);
+        if (isset($valid_player1[0])) {
+            $error_message = "Invalid player 1 ID.";
+            $isValid = false;
+        } else {
+            
+        }
+
+        $valid_player2 = MatchDB::authenticationPlayer($player1_ID);
+        if (isset($valid_player2[0])) {
+            $error_message = "Invalid player 2 ID.";
+            $isValid = false;
+        } else {
+            
+        }
+
+        $valid_char1 = MatchDB::authenticationChar($char1_ID);
+        if (isset($valid_char1[0])) {
+            $error_message = "Invalid char 1 ID.";
+            $isValid = false;
+        } else {
+            
+        }
+
+        $valid_char2 = MatchDB::authenticationChar($char2_ID);
+        if (isset($valid_char2[0])) {
+            $error_message = "Invalid char 2 ID.";
+            $isValid = false;
+        } else {
+            
+        }

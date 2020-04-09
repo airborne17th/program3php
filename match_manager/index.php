@@ -3,6 +3,8 @@ require('../model/database.php');
 require('../model/player.php');
 require('../model/player_db.php');
 require('../model/match.php');
+require('../model/match_char.php');
+require('../model/match_player.php');
 require('../model/match_db.php');
 require('../model/char.php');
 require('../model/char_db.php');
@@ -11,161 +13,16 @@ $action = filter_input(INPUT_POST, 'action');
 if ($action === NULL) {
     $action = filter_input(INPUT_GET, 'action');
     if ($action === NULL) {
-        $action = 'match_records';
+        $action = 'list_matches';
     }
 }
 switch ($action) {
-    case 'match_records':
-        $players = MatchDB::getMatches();
+    case 'list_matches':
+        $matches = MatchDB::getMatches();
         include('match_records.php');
         break;
-    case 'registration':
-        include('registration.php');
-        break;
-    case 'add_player':
-        // Fetch the data from the registration attempt
-        $first_name = filter_input(INPUT_POST, 'first_name');
-        $last_name = filter_input(INPUT_POST, 'last_name');
-        $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
-        $playerTest = filter_input(INPUT_POST, "newplayer");
-        $passTest = filter_input(INPUT_POST, "newpass");
-        
-        // Values used for validation
-        $validationCounter = 0;
-        $isValid = true;
-
-        // Validate the inputs
-        if (empty($first_name) || empty($last_name) || empty($playerTest) || empty($passTest) ||
-            $email === NULL || $email === false) {
-                $error_message = "Invalid player data! Check all fields and try again.";
-                $isValid = false;
-            } else {
-            $isValid = true;
-            }
-        
-        // Regex validation
-        if (preg_match('/^[A-Za-z]/', $playerTest)) {
-            } else {
-            $error_message = "Player must start with a letter.";
-            $isValid = false;
-            }
-
-        if (preg_match('/^[a-zA-Z\d_-]{4,30}$/', $playerTest)) {
-            } else {
-                $error_message = "player must be within 4 to 30 characters in length. playername cannot have special characters (@$!%*?&).";
-                $isValid = false;
-            }
-        
-        if (preg_match('/^.{12,}$/', $passTest)) {
-            } else {
-                $error_message = "Password must be at least 12 characters long.";
-                $isValid = false;
-            } 
-
-        if (preg_match('/(?=.*[a-z])/', $passTest)) {
-                $validationCounter + 1;
-            }
-            if (preg_match('/(?=.*[A-Z])/', $passTest)) {
-                $validationCounter = $validationCounter + 1;
-            }
-            if (preg_match('/(?=.*\d)/', $passTest)) {
-                $validationCounter = $validationCounter + 1;
-            }
-            if (preg_match('/(?=.*[@$!%*?&])/', $passTest)) {
-                $validationCounter = $validationCounter + 1;
-            }
-            if ($validationCounter >= 3) {
-            } else {
-                $error_message = "Password must have the following, an upper case letter, lower case letter, a digit and a special character.";
-                $isValid = false;
-            }
-
-            $playerResult = playerDB::duplicatePlayer($playerTest);
-        // Test for duplicate playername
-        if ($playerResult > 0)
-            {
-                $error_message = "Player Name in use.";
-                $isValid = false;
-            } else {
-
-            }
-
-            $emailResult = playerDB::duplicateEmail($email);
-            // Test for duplicate e-mail
-            if ($emailResult > 0)
-                {
-                    $error_message = "E-mail in use.";
-                    $isValid = false;
-                } else {
-    
-                }
-        // if it valid then insert data into the SQL Database
-        if($isValid == true) {
-            // Make the password being tested the final password
-            $password = $passTest;
-            $player_name = $playerTest;
-            // Create the Session to validate the player is logged in and track name
-            $_SESSION["player_name"] = $player_name;
-            // Hash it for the server and pass it back to the password
-            $hash = password_hash ( $password , PASSWORD_BCRYPT );
-            $password = $hash;
-            $win = 0;
-            $loss = 0;
-            $total = 0;
-            $i = new Player($first_name, $last_name, $email, $player_name, $password, $win, $loss, $total);
-            PlayerDB::addPlayer($i);
-            include('confirmation.php');
-        } else {
-            include('registration.php');
-        }
-        break;
-    case 'login_initial':
-        $loginerror_message = "";
-        include('login.php');    
-        break;
-    case 'login': 
-        $isValid = true;
-        $hash = "!";
-        $loginerror_message = "";
-        $player_entry = filter_input(INPUT_POST, 'player_entry');
-        $password_entry = filter_input(INPUT_POST, 'password_entry');
-        $hashed_password = playerDB::authenticationPlayer($player_entry);
-        if (isset($hashed_password[0])) {
-            $hash = $hashed_password[0];
-            trim($hash); 
-        }
-           
-
-        if(password_verify($password_entry, $hash)){
-            $isValid = true;
-        } else {
-            $isValid = false;
-            $loginerror_message = "Login Failed. Check player name or password.";
-        } 
-
-        if (isset($_SESSION["player_name"]) && $_SESSION["player_name"] !== "!"){
-            $isValid = false;
-            $loginerror_message = "Login Failed. Already logged in.";
-        }
-
-        if ($isValid == true) {
-            $_SESSION["player_name"] = $player_entry;
-            $loginerror_message = "Login Success!";
-            include('login.php');
-        } else {
-            include('login.php');
-        }
-        break; 
-    case 'logoff' :
-       $_SESSION = array();
-       session_destroy();
-       $loginerror_message = "";
-       include('login.php');
-       break;
-    case 'profile' :
-        $player_message = '';
-        $pass_message = '';
-        $email_message = '';
+    case 'record_match':
+        $error_message = '';
         if(isset($_SESSION["player_name"])){
 
         } else {
@@ -176,94 +33,100 @@ switch ($action) {
         $player = $_SESSION["player_name"];
 
         if (is_null($player)){
-            $error_message = "Not a member? Sign up here!";;
+            $error_message = "Sorry, only members can record matches!";;
             include('registration.php');
         } 
 
         if ($player === "!")
         {
-            $error_message = "Not a member? Sign up here!";
-            include('registration.php');
+            $error_message = "Sorry, only members can record matches!";
+            include('../player_manager/registration.php');
         } else {
             $player_display = $_SESSION["player_name"];
-            include('player_profile.php');
+            $matchplayers = MatchDB::getPlayers();
+            $matchchars = MatchDB::getChars();
+            include('record.php');
         }
-    break;
-    case 'changeplayer' :
-        $oldplayer = $_SESSION["player_name"];
-        $playerTest = filter_input(INPUT_POST, "newplayer");
-        $playerResult = playerDB::duplicatePlayer($playerTest);
-        // Test for duplicate playername
-        if ($playerResult > 0)
-            {
-                $player_message = "playername in use.";
-            } else {
-                $newplayer = $playerTest;
-                $player_message = "playername successfully updated.";
-                playerDB::changeplayer($newplayer, $oldplayer);
-                $_SESSION["player_name"] = $newplayer;
-            }
-        $pass_message = '';
-        $email_message = '';
-        $player_display = $_SESSION["player_name"];
-        include('playerprofile.php');
-    break;   
-    case 'changePassword' :
-        $passTest = filter_input(INPUT_POST, "newpass");
-        $validationCounter = 0;
-        $isValid = true;
-        if (preg_match('/^.{12,}$/', $passTest)) {
-        } else {
-            $pass_message = "Password must be at least 12 characters long.";
-            $isValid = false;
-        } 
-
-        if (preg_match('/(?=.*[a-z])/', $passTest)) {
-            $validationCounter + 1;
-        }
-        if (preg_match('/(?=.*[A-Z])/', $passTest)) {
-            $validationCounter = $validationCounter + 1;
-        }
-        if (preg_match('/(?=.*\d)/', $passTest)) {
-            $validationCounter = $validationCounter + 1;
-        }
-        if (preg_match('/(?=.*[@$!%*?&])/', $passTest)) {
-            $validationCounter = $validationCounter + 1;
-        }
-        if ($validationCounter >= 3) {
-        } else {
-            $pass_message = "Password must have the following, an upper case letter, lower case letter, a digit and a special character.";
-            $isValid = false;
-        }
-
-        if ($isValid == true) {
-            $password = $passTest;
-            $hash = password_hash ( $password , PASSWORD_BCRYPT );
-            $player = $_SESSION["player_name"];
-            playerDB::changePassword($hash, $player);
-            $pass_message = "Password successfully updated";
-        } 
-        $player_message = '';
-        $email_message = '';
-        $player_display = $_SESSION["player_name"];
-        include('playerprofile.php');
         break;
-    case 'changeEmail' :
-            $emailTest = filter_input(INPUT_POST, "newemail");
-            $emailResult = playerDB::duplicateEmail($emailTest);
-            if ($emailResult > 0)
-            {
-            $email_message = "E-mail in use.";
-            } else {
-            $newEmail = $emailTest;
-            $player = $_SESSION["player_name"];
-            $email_message = "E-mail successfully updated.";
-            playerDB::changeEmail($newEmail, $player);
-            }
-            $pass_message = '';
-            $player_message = '';
-            $player_display = $_SESSION["player_name"];
-            include('playerprofile.php');
-        break;        
+    
+    case 'add_match':
+        $player_display = $_SESSION["player_name"];
+        $matchplayers = MatchDB::getPlayers();
+        $matchchars = MatchDB::getChars();
+
+        // Fetch the data from the match
+        $player1_ID = filter_input(INPUT_POST, 'player1_ID');
+        $char1_ID = filter_input(INPUT_POST, 'char1_ID');
+        $player2_ID = filter_input(INPUT_POST, 'player2_ID');
+        $char2_ID = filter_input(INPUT_POST, "char2_ID");
+        $winner_ID = filter_input(INPUT_POST, "winner_ID");
+        $record_name = $_SESSION["player_name"];
+        $loser_ID;
+        $loser_charID;
+        $winner_charID;
+        $error_message = ''; 
+        $isValid = true;
+
+        // Validating the input
+        if (empty($player1_ID) || empty($char1_ID) || empty($player2_ID) || empty($char2_ID) ||
+        empty($winner_ID) )  {
+            $error_message = "Invalid match data! Make sure all fields are filled.";
+            $isValid = false;
+        } else {
+            $isValid = true;
+        }
+
+        if (is_numeric($player1_ID) || is_numeric($char1_ID) || is_numeric($player2_ID) || is_numeric($char2_ID) ||
+        is_numeric($winner_ID) )  {
+            $isValid = true;
+        } else {
+            $error_message = "Invalid match data! Make sure all fields are numbers.";
+            $isValid = false;
+        }
+
+        if ($winner_ID === $player1_ID || $winner_ID === $player2_ID) {
+
+        } else {
+            $error_message = "Winner must be from the two players!";
+            $isValid = false;
+        }
+        
+        if ($player1_ID === $player2_ID){
+            $error_message = "Cannot have the player play against the same player!";
+            $isValid = false;
+        }
+
+        if ($winner_ID === $player1_ID){
+            $loser_ID = $player2_ID;
+            $loser_charID = $char2_ID;
+            $winner_charID = $char1_ID;
+        } else {
+            $loser_ID = $player1_ID;
+            $loser_charID = $char1_ID;
+            $winner_charID = $char2_ID;
+        }
+
+
+        if($isValid == true) {
+            //Method calls to fetch the remaining data based on what was passed down.
+            $record_ID = MatchDB::getRecorderID($record_name);
+            $player1_name = MatchDB::getPlayerName($player1_ID);
+            $char1_name = MatchDB::getCharName($char1_ID);
+            $player2_name = MatchDB::getPlayerName($player2_ID);
+            $char2_name = MatchDB::getCharName($char2_ID);
+            // This is the call to input all the data created
+            $i = new Match($player1_name[0], $player1_ID, $char1_name[0], $player2_name[0], $player2_ID, $char2_name[0], $winner_ID, $record_ID[0]);
+            MatchDB::addMatch($i);
+            MatchDB::set_PlayerWin($winner_ID);
+            MatchDB::set_PlayerLoss($loser_ID);
+            MatchDB::set_CharWin($winner_charID);
+            MatchDB::set_CharLoss($loser_charID);
+
+            $error_message = "Successfully logged match!";
+            include('record.php');
+        } else{
+            include('record.php');
+        }
+        break;  
 }
 ?>
