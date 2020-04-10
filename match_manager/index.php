@@ -61,9 +61,12 @@ switch ($action) {
         $char2_ID = filter_input(INPUT_POST, "char2_ID");
         $winner_ID = filter_input(INPUT_POST, "winner_ID");
         $record_name = $_SESSION["player_name"];
+
+        // Initialize variables for later
         $loser_ID;
         $loser_charID;
         $winner_charID;
+        $winner_name;
         $error_message = ''; 
         $isValid = true;
 
@@ -114,6 +117,7 @@ switch ($action) {
             $char1_name = MatchDB::getCharName($char1_ID);
             $player2_name = MatchDB::getPlayerName($player2_ID);
             $char2_name = MatchDB::getCharName($char2_ID);
+            $winner_name = MatchDB::getPlayerName($winner_ID);
             // This is the call to input all the data created
             $i = new Match($player1_name[0], $player1_ID, $char1_name[0], $player2_name[0], $player2_ID, $char2_name[0], $winner_ID, $record_ID[0]);
             MatchDB::addMatch($i);
@@ -121,9 +125,7 @@ switch ($action) {
             MatchDB::set_PlayerLoss($loser_ID);
             MatchDB::set_CharWin($winner_charID);
             MatchDB::set_CharLoss($loser_charID);
-
-            $error_message = "Successfully logged match!";
-            include('record.php');
+            include('confirmation.php');
         } else{
             include('record.php');
         }

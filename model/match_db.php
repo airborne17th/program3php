@@ -28,7 +28,7 @@ class MatchDB {
         $db = Database::getDB();
 
         $query = 'SELECT playerID, playerName FROM players
-                  ORDER BY playerName';
+                  ORDER BY playerID';
         $statement = $db->prepare($query);
         $statement->execute();
         $rows = $statement->fetchAll();

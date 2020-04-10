@@ -3,11 +3,12 @@ $the_title = "SC | Record Match";
 $pathcor = "../";
 require_once '../view/header.php';
 ?>
-
+<div class="container" style="margin-top:30px">
 <div class="row">
 <div class="col-sm-6">
 <h1>Hello! <?php echo $player_display ?></h1>
 <p>Here you can record the results of matches.<p>
+<div class='record_form'>
 <form action="." method="post">
         <h2>Match Record Form</h2>
         <input type="hidden" name="action" value="add_match">
@@ -21,14 +22,14 @@ require_once '../view/header.php';
         <label>Player2 CharacterID:  </label><br>
         <input type="text" name="char2_ID" placeholder="Enter in char ID"><br> 
         <label>Winner ID:  </label><br>
-        <input type="text" name="winner_ID" placeholder="Enter in winner ID"><br> 
+        <input type="text" name="winner_ID" placeholder="Enter in winner ID"><br><br> 
         <input type="submit" value="Submit"><br><br>
     </form>
 </div>
 </div>
-<div class="row">
+
 <div class="col-sm-6">
-<p>For reference: </p>
+<h2>For reference: </h2>
         <table>
             <tr>
                 <th>ID</th>
@@ -54,6 +55,7 @@ require_once '../view/header.php';
                 </tr>
             <?php endforeach; ?>
         </table>
+</div>
 </div>
 </div>
 <?php require_once '../view/footer.php'; ?> 

@@ -18,7 +18,7 @@
   <main>
     <div class="jumbotron text-center" id="headerBanner">
       <h1>Smash Central</h1>
-      <p>Play, learn and laugh with a social and competitive group of players.</p> 
+      <h3>Play, learn and laugh with a social and competitive group of players.</h3> 
       <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
   <div>
     <ul class="navbar-nav">

@@ -11,8 +11,10 @@ require_once '../view/header.php'; ?>
         <div class="login-box">	
             <form class="box" action="." method="post">
             <input type="hidden" name="action" value="login">
+            <div class='login_form'>
             <h2>Login</h2>
-        <p>This website is used to connect people on campus to have fun and enjoy activities at SCC.<br> Please use the boxes below to sign into your account.</p> 
+        <p>Enjoy playing an awesome game with awesome friends! Please use the boxes below to sign into your account.</p> 
+            </div>  
                 <span class="error"><?php echo $loginerror_message ?></span>
                 <br><br>
                 <i class="far fa-address-card fa-2x"></i>

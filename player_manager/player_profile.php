@@ -4,6 +4,7 @@ $pathcor = "../";
 require_once '../view/header.php';
 ?>
    <body>
+   <!-- <img src="../img/profile_banner.jpg" alt="Login Banner"> -->
    <h1>Welcome! <?php echo $player_display ?></h1>
       <form action="." method="POST">
          <input type="hidden" name="action" value="changeUser"/>

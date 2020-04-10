@@ -31,6 +31,7 @@ require_once 'view/header.php';
         <div class="col-sm-8">
           <h2>Latest News</h2>
           <h5>Local groups band together, March 23, 2020</h5>
+          <img src="img/gaming1.jpg" alt="Picture of young players" height="400" width="700">
           <p>Some local players have taken it upon themselves to give donations to and teach younger players.</p>
           <p><a href="#">Learn More</a></p>
           <br>

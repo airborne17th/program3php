@@ -5,7 +5,7 @@ $pathcor = "../";
 
 require_once '../view/header.php';
 ?>
-    <section>
+    <section class="box">
         <table>
             <tr>
                 <th>Character Name</th>
