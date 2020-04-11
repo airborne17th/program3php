@@ -1,6 +1,8 @@
-<?php include '../view/header.php'; ?>
-<main>
+<?php 
+$the_title = "SC | Error!";
+$pathcor = "../";
+require_once '../view/header.php';
+?>
     <h1>Error</h1>
     <p><?php echo htmlspecialchars($error); ?></p>
-</main>
-<?php include '../view/footer.php'; ?>
+<?php require_once '../view/footer.php'; ?>

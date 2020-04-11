@@ -28,7 +28,7 @@ require_once '../view/header.php';
 </div>
 </div>
 
-<div class="col-sm-6">
+<div class="col-sm-3">
 <h2>For reference: </h2>
         <table>
             <tr>
@@ -43,6 +43,8 @@ require_once '../view/header.php';
             <?php endforeach; ?>
         </table>
 <br><br>
+</div>
+<div class="col-sm-3">
         <table>
             <tr>
                 <th>ID</th>

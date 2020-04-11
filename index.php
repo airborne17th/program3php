@@ -41,8 +41,8 @@ require_once 'view/header.php';
           <!-- TO DO turn this into PHP and pull the data from players directory table. Optional -->
           <table>
             <li>Patrick Henrick Record: 10-2</li>
-            <li>John Kyker Record 8-3</li>
-            <li>Alexander Smith  Record 7-4</li>
+            <li>John Kyker Record: 8-3</li>
+            <li>Alexander Smith  Record: 7-4</li>
           </table>
           </div>
           <h2>Come Play!</h2>

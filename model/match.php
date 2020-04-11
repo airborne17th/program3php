@@ -2,7 +2,7 @@
 class Match {
     private $id, $player1_name, $player1_ID, $char1_name, $player2_name, $player2_ID, $char2_name, $winner_ID, $recorderID;
 
-    public function __construct($player1_name, $player1_ID, $char1_name, $player2_name, $player2_ID, $char2_name, $winner_ID, $recorderID) {
+    public function __construct($player1_name, $player1_ID, $char1_name, $player2_name, $player2_ID, $char2_name, $winner_ID, $loss_ID, $recorderID) {
         $this->player1_name = $player1_name;
         $this->player1_ID = $player1_ID;
         $this->char1_name = $char1_name;
@@ -10,6 +10,7 @@ class Match {
         $this->player2_ID = $player2_ID;
         $this->char2_name = $char2_name;
         $this->winner_ID = $winner_ID;
+        $this->loss_ID = $loss_ID;
         $this->recorderID = $recorderID;
     }
 
@@ -69,6 +70,14 @@ class Match {
     public function setWinner_ID($value) {
         $this->winner_ID = $value;
     }
+
+    public function getLoss_ID() {
+        return $this->loss_ID;
+    }
+    public function setLoss_ID($value) {
+        $this->loss_ID = $value;
+    }
+    
     public function getRecorderID() {
         return $this->recorderID;
     }

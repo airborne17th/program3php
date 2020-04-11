@@ -119,7 +119,7 @@ switch ($action) {
             $char2_name = MatchDB::getCharName($char2_ID);
             $winner_name = MatchDB::getPlayerName($winner_ID);
             // This is the call to input all the data created
-            $i = new Match($player1_name[0], $player1_ID, $char1_name[0], $player2_name[0], $player2_ID, $char2_name[0], $winner_ID, $record_ID[0]);
+            $i = new Match($player1_name[0], $player1_ID, $char1_name[0], $player2_name[0], $player2_ID, $char2_name[0], $winner_ID, $loser_ID, $record_ID[0]);
             MatchDB::addMatch($i);
             MatchDB::set_PlayerWin($winner_ID);
             MatchDB::set_PlayerLoss($loser_ID);
@@ -130,5 +130,40 @@ switch ($action) {
             include('record.php');
         }
         break;  
+    case 'delete_match':
+        $match_id = filter_input(INPUT_POST, 'match_id', FILTER_VALIDATE_INT);
+        $char1_name = MatchDB::find_char1_from_match($match_id);
+        $char2_name = MatchDB::find_char2_from_match($match_id);
+        $player1 = MatchDB::find_player1_from_match($match_id);
+        $player2 = MatchDB::find_player2_from_match($match_id);
+        $char1_ID = MatchDB::getCharID($char1_name[0]);
+        $char2_ID = MatchDB::getCharID($char2_name[0]);
+        $winner = MatchDB::find_winner_from_match($match_id);
+        $loser = MatchDB::find_loss_from_match($match_id);
+        $recorder = MatchDB::find_recorder_from_match($match_id);
+        // Check to see if the ID of the recorder is the same as the ID of the person trying to delete.
+        $deleter_name = $_SESSION["player_name"];
+        $deleter_ID = MatchDB::getPlayerID($deleter_name);
+        if($deleter_ID[0] === $recorder[0]){
+            if ($player1[0] === $winner[0]){
+                MatchDB::reset_PlayerWin($player1[0]);
+                MatchDB::reset_PlayerLoss($player2[0]);
+                MatchDB::reset_CharWin($char1_ID[0]);
+                MatchDB::reset_CharLoss($char2_ID[0]);
+                MatchDB::deleteMatch($match_id);
+            } else {
+                MatchDB::reset_PlayerWin($player2[0]);
+                MatchDB::reset_PlayerLoss($player1[0]);
+                MatchDB::reset_CharWin($char2_ID[0]);
+                MatchDB::reset_CharLoss($char1_ID[0]);
+                MatchDB::deleteMatch($match_id);
+            }
+            include('delete_confirmation.php');
+        } else {
+            $error = 'Only the recorder can delete the match. If there is a dispute on results talk to an admin about manually overriding the results.';
+            include('../errors/error.php');
+        }
+
+        break;
 }
 ?>

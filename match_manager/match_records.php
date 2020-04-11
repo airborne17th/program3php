@@ -17,6 +17,7 @@ require_once '../view/header.php';
             <th>Character 2 Name</th>
             <th>&nbsp; &nbsp; &nbsp;</th>
             <th>Winner ID</th>
+            <th>Loss ID</th>
             <th>Recorder ID</th>
         </tr>
         <?php foreach ($matches as $match) : ?>
@@ -30,7 +31,17 @@ require_once '../view/header.php';
                 <td><?php echo htmlspecialchars($match->getChar2_Name()); ?></td>
                 <td>&nbsp;</td>
                 <td><?php echo htmlspecialchars($match->getWinner_ID()); ?></td>
+                <td><?php echo htmlspecialchars($match->getLoss_ID()); ?></td>
                 <td><?php echo htmlspecialchars($match->getRecorderID()); ?></td>
+                <td>
+                    <form action="." method="post">
+                    <input type="hidden" name="action"
+                       value="delete_match">
+                    <input type="hidden" name="match_id"
+                       value="<?php echo htmlspecialchars($match->getMatchID()); ?>">
+                    <input type="submit" name="submit" value="Delete"> 
+                    </form>
+                </td>
             </tr>
         <?php endforeach; ?>
     </table>
