@@ -1,0 +1,129 @@
+:root{
+    font-family: 'Montserrat', sans-serif;
+}
+#headerBanner{
+    margin-bottom: 0;
+    background-image: url("img/login_bg.jpeg");
+    background-repeat: no-repeat, repeat;
+    background-position: center;
+    background-color: #0a2463;
+    color: black;
+    font-size: 1rem;
+} 
+nav{
+    list-style: none;
+    list-style-type: none;
+}
+.authorImg{
+    text-align: center;
+}
+.leaderboard{
+    list-style: none;
+}
+.nav-item{
+    background-color: #C3C4B2;
+    border-radius: 0.5rem;
+    border-style: solid;
+    border-color: #131916;
+    text-align: center;
+    list-style: none;
+}
+.nav-item a{
+    color: black;
+}
+
+table{
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+}
+
+td{
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+    text-align: center;
+}
+
+th{
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+    text-align: center;
+}
+
+.users img{
+    width: 25%;
+    border-radius: 50%;
+  }
+
+  .error{
+    color: red;
+    font-weight: bold;
+}
+
+.box{
+	width: 300px;
+  padding: 40px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+	background: none;
+	text-align: center;
+}
+
+.box h1{
+	color: white;
+	font-weight: 500;	
+}
+
+.box input[type = "text"],.box input[type = "password"]{
+	border: 0;
+	background: white;
+	display: block;
+	margin: 20px auto;
+	text-align: center;
+	border: 3px solid #03256C;
+	padding: 14px 10px;
+	width: 200px;
+	outline: none;
+	color: black;
+	border-radius: 25px;
+	transition: 0.25s;
+}
+
+.box input[type = "text"]:focus,.box input[type = "password"]:focus{
+	width: 300px;
+	border-color: #494884;
+}
+
+.box input[type = "submit"]{
+	font-family: "montserrat", sans-serif;
+	border: 0;
+	background: white;
+	display: block;
+	margin: 20px auto;
+	text-align: center;
+	border: 3px solid #03256C;
+	padding: 14px 10px;
+	width: 200px;
+	outline: none;
+	color: black;
+	border-radius: 25px;
+	transition: 0.25s;
+	cursor: pointer;
+}
+
+.box input[type = "submit"]:hover{
+	background: #78a1bb;
+}
+
+.record_form{
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    background-image: url("img/record.jpeg");
+}

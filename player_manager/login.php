@@ -3,7 +3,7 @@
 $the_title = "SC | Login";
 $pathcor = "../";
 
-require_once '../view/header.php'; ?>
+require_once '../view/login_header.php'; ?>
 
 
     </div>

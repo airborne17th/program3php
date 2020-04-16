@@ -59,7 +59,7 @@ switch ($action) {
             } 
 
         if (preg_match('/(?=.*[a-z])/', $passTest)) {
-                $validationCounter + 1;
+                $validationCounter = $validationCounter + 1;
             }
             if (preg_match('/(?=.*[A-Z])/', $passTest)) {
                 $validationCounter = $validationCounter + 1;
@@ -67,7 +67,7 @@ switch ($action) {
             if (preg_match('/(?=.*\d)/', $passTest)) {
                 $validationCounter = $validationCounter + 1;
             }
-            if (preg_match('/(?=.*[@$!%*?&])/', $passTest)) {
+            if (preg_match('/(?=.*[@#$%^&*()\\[\]{}\-_=~`|:;])/', $passTest)) {
                 $validationCounter = $validationCounter + 1;
             }
             if ($validationCounter >= 3) {
@@ -189,16 +189,35 @@ switch ($action) {
         $oldplayer = $_SESSION["player_name"];
         $playerTest = filter_input(INPUT_POST, "newplayer");
         $playerResult = playerDB::duplicatePlayer($playerTest);
+        $isValid = true; 
+        if (preg_match('/^[A-Za-z]/', $userTest)) {
+        } else {
+            $error_message = "User must start with a letter.";
+            $isValid = false;
+        }
+
+        if (preg_match('/^[a-zA-Z\d_-]{4,30}$/', $userTest)) {
+        } else {
+            $error_message = "User must be within 4 to 30 characters in length. Username cannot have special characters (@$!%*?&).";
+            $isValid = false;
+        }
+
         // Test for duplicate playername
         if ($playerResult > 0)
             {
                 $player_message = "playername in use.";
+                $isValid = false;
             } else {
-                $newplayer = $playerTest;
-                $player_message = "playername successfully updated.";
-                playerDB::changeplayer($newplayer, $oldplayer);
-                $_SESSION["player_name"] = $newplayer;
+                
             }
+        
+        if ($isValid == true){
+            $newplayer = $playerTest;
+            $player_message = "playername successfully updated.";
+            playerDB::changeplayer($newplayer, $oldplayer);
+            $_SESSION["player_name"] = $newplayer; 
+        }
+  
         $pass_message = '';
         $email_message = '';
         $player_display = $_SESSION["player_name"];
@@ -223,7 +242,7 @@ switch ($action) {
         if (preg_match('/(?=.*\d)/', $passTest)) {
             $validationCounter = $validationCounter + 1;
         }
-        if (preg_match('/(?=.*[@$!%*?&])/', $passTest)) {
+        if (preg_match('/(?=.*[@#$%^&*()\\[\]{}\-_=~`|:;])/', $passTest)) {
             $validationCounter = $validationCounter + 1;
         }
         if ($validationCounter >= 3) {
@@ -245,7 +264,7 @@ switch ($action) {
         include('playerprofile.php');
         break;
     case 'changeEmail' :
-            $emailTest = filter_input(INPUT_POST, "newemail");
+            $emailTest = filter_input(INPUT_POST, "newemail", FILTER_VALIDATE_EMAIL);
             $emailResult = playerDB::duplicateEmail($emailTest);
             if ($emailResult > 0)
             {

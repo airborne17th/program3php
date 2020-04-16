@@ -48,3 +48,9 @@ $valid_player1 = MatchDB::authenticationPlayer($player1_ID);
         } else {
             
         }
+
+        I think there’s quite a bit you can expand on in terms of individual stats. Without adding any extra columns to the db you could query the matches and get this sort of info for each player:
+Win loss percentage for each character they’ve played
+Select a character and see what other characters they’ve won and lost vs, e.g. Billy has played as Kirby 4 times with 1 win over Link, 1 loss to Samus and 2 losses Waluigi
+Win loss percentage vs other players
+Select another player and see your match history vs just that player
