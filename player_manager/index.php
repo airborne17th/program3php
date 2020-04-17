@@ -13,6 +13,7 @@ if ($action === NULL) {
 switch ($action) {
     case 'list_players':
         $players = PlayerDB::getPlayers();
+        $winrates = PlayerDB::get_WinRate();
         include('player_directory.php');
         break;
     case 'registration':

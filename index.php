@@ -37,12 +37,10 @@ require_once 'view/header.php';
           <br>
           <div class="leaderboard">
           <h2>Leaderboard</h2>
-          <h5>Top players as updated, April 4, 2020</h5>
-          <!-- TO DO turn this into PHP and pull the data from players directory table. Optional -->
+          <h5>Top players</h5>
           <table>
-            <li>Patrick Henrick Record: 10-2</li>
-            <li>John Kyker Record: 8-3</li>
-            <li>Alexander Smith  Record: 7-4</li>
+            <li>Logan "boppmaster"</li>
+            <li>John "airborne17th"</li>
           </table>
           </div>
           <h2>Come Play!</h2>

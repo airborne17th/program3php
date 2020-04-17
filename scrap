@@ -54,3 +54,7 @@ Win loss percentage for each character they’ve played
 Select a character and see what other characters they’ve won and lost vs, e.g. Billy has played as Kirby 4 times with 1 win over Link, 1 loss to Samus and 2 losses Waluigi
 Win loss percentage vs other players
 Select another player and see your match history vs just that player
+
+                    <?php foreach ($winrates as $winrate) : ?>
+                            echo $winrate;
+                    <?php endforeach; ?>

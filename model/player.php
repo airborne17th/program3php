@@ -38,6 +38,10 @@ class Player {
         return $this->first_name . ' ' . $this->last_name;
     }
 
+    public function getWinRate() {
+        return $this->win / $this->total;
+    }
+
     public function getEmail() {
         return $this->email;
     }

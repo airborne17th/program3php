@@ -112,6 +112,20 @@ class PlayerDB {
         
         return $emailResult;
     }
+
+    public static function get_WinRate() {
+        $db = Database::getDB();
+        $query = 'SELECT (win/total) winrate
+                FROM players
+                ORDER BY lastName'; 
+        $statement = $db->prepare($query);
+        $statement->execute();
+        $winrate = $statement->fetchAll();
+        $statement->closeCursor();
+
+        return $winrate;
+    }
+
 }
 ?>
 

@@ -43,5 +43,9 @@ class Character {
     public function setTotal($value) {
         $this->total = $value;
     }
+    
+    public function getWinRate() {
+        return $this->win / $this->total;
+    }
 }
 ?>

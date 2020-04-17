@@ -12,7 +12,8 @@ if ($action === NULL) {
 switch ($action) {
     case 'list_chars':
         $chars = CharDB::getChars();
+        $topchars = CharDB::getTopChars();
         include('char_directory.php');
         break;
-        }
+    }
 ?>

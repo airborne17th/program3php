@@ -14,6 +14,7 @@ require_once '../view/header.php';
                 <th>Wins</th>
                 <th>Losses</th>
                 <th>Total Games</th>
+                <th>Win Rate</th>
             </tr>
             <?php foreach ($players as $player) : ?>
                 <tr>
@@ -23,6 +24,9 @@ require_once '../view/header.php';
                     <td><?php echo htmlspecialchars($player->getWin()); ?></td>
                     <td><?php echo htmlspecialchars($player->getLoss()); ?></td>
                     <td><?php echo htmlspecialchars($player->getTotal()); ?></td>
+                    <td>
+                    <?php echo htmlspecialchars(number_format((float)$player->getWinRate(), 2, '.', '')); ?>
+                    </td>
                 </tr>
             <?php endforeach; ?>
         </table>
