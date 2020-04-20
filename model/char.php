@@ -1,12 +1,13 @@
 <?php
 class Character {
-    private $id, $char_name, $win, $loss, $total;
+    private $id, $char_name, $win, $loss, $total, $image;
 
-    public function __construct($char_name, $win, $loss, $total) {
+    public function __construct($char_name, $win, $loss, $total, $image) {
         $this->char_name = $char_name;
         $this->win = $win;
         $this->loss = $loss;
         $this->total = $total;
+        $this->image = $image;
     }
 
     public function getID() {
@@ -47,5 +48,13 @@ class Character {
     public function getWinRate() {
         return $this->win / $this->total;
     }
+
+    public function getImage() {
+        return $this->image;
+    }
+    public function setImage($value) {
+        $this->image = $value;
+    }
+    
 }
 ?>

@@ -127,3 +127,8 @@ th{
     font-weight: bold;
     background-image: url("img/record.jpeg");
 }
+
+.char-img {
+    max-width: 100%;
+    height: auto;
+}

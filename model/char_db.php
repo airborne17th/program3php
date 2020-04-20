@@ -15,7 +15,7 @@ class CharDB {
       foreach($rows as $row) {
           $i = new Character(
                   $row['charName'], $row['win'],
-                  $row['loss'], $row['total']);
+                  $row['loss'], $row['total'], $row['image']);
           $i->setID($row['charID']);
           $chars[] = $i;
       }
@@ -36,7 +36,7 @@ class CharDB {
     foreach($rows as $row) {
         $i = new Character(
                 $row['charName'], $row['win'],
-                $row['loss'], $row['total']);
+                $row['loss'], $row['total'], $row['image']);
         $i->setID($row['charID']);
         $chars[] = $i;
     }
@@ -45,7 +45,7 @@ class CharDB {
 
   public static function get_WinRate() {
     $db = Database::getDB();
-    $query = 'SELECT (win/total) winrate
+    $query = 'SELECT (win/total) winrate, IF(total > 0)
             FROM characters
             ORDER BY win'; 
     $statement = $db->prepare($query);

@@ -29,6 +29,7 @@ require_once '../view/header.php';
     <section class="box">
         <table>
             <tr>
+                <th>Image</th>
                 <th>Character Name</th>
                 <th>Wins</th>
                 <th>Losses</th>
@@ -36,6 +37,8 @@ require_once '../view/header.php';
             </tr>
             <?php foreach ($chars as $char) : ?>
                 <tr>
+                
+                    <td><img class="char-img" src="<?php echo $char->getImage(); ?>" alt="Character Profile Pic" width='100' height='100'></td>
                     <td><?php echo htmlspecialchars($char->getCharName()); ?></td>
                     <td><?php echo htmlspecialchars($char->getWin()); ?></td>
                     <td><?php echo htmlspecialchars($char->getLoss()); ?></td>

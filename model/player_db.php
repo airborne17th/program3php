@@ -115,7 +115,7 @@ class PlayerDB {
 
     public static function get_WinRate() {
         $db = Database::getDB();
-        $query = 'SELECT (win/total) winrate
+        $query = 'SELECT (win/total) AS winrate, IF(total > 0)
                 FROM players
                 ORDER BY lastName'; 
         $statement = $db->prepare($query);
