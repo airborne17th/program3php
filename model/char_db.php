@@ -45,9 +45,13 @@ class CharDB {
 
   public static function get_WinRate() {
     $db = Database::getDB();
-    $query = 'SELECT (win/total) winrate, IF(total > 0)
-            FROM characters
-            ORDER BY win'; 
+    $query = 'SELECT CASE
+    WHEN total = 0
+    THEN 0
+    ELSE win/total 
+    END AS winrate
+        FROM characters
+        ORDER BY playerID'; 
     $statement = $db->prepare($query);
     $statement->execute();
     $winrate = $statement->fetchAll();

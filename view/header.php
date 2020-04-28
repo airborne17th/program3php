@@ -4,12 +4,11 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Website designed for Nintendo Smash Bros">
+        <meta name="author" content="John Kyker">
         <link rel="stylesheet" href="<?php echo $pathcor; ?>style.css">
         <link rel="icon" href="<?php echo $pathcor; ?>img/browser.png">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
         <script src="https://kit.fontawesome.com/80c1c40743.js" crossorigin="anonymous"></script>
         <title><?php echo $the_title; ?></title>
     </head>
@@ -30,7 +29,7 @@
     <li class="nav-item"><a href="<?php echo $pathcor; ?>about">About</a></li>
     <li class="nav-item"><a href="<?php echo $pathcor; ?>player_manager?action=profile">Profile</a></li>
     <li class="nav-item"><a href="<?php echo $pathcor; ?>player_manager?action=registration">Registration</a></li>
-    <li class="nav-item"><a href="<?php echo $pathcor; ?>player_manager?action=login_initial">Login</a></li>
+    <li class="nav-item"><a href="<?php echo $pathcor; ?>player_manager?action=login_initial">Login Here</a></li>
     </ul>
   </div>  
 </nav>

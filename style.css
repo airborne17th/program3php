@@ -132,3 +132,9 @@ th{
     max-width: 100%;
     height: auto;
 }
+
+.player-directory{
+    text-align: center;
+    margin: auto;
+    width: 50%;
+}

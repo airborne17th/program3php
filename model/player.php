@@ -39,7 +39,7 @@ class Player {
     }
 
     public function getWinRate() {
-        return $this->win / $this->total;
+         return $this->win / $this->total;
     }
 
     public function getEmail() {

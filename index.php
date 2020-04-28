@@ -23,7 +23,7 @@ require_once 'view/header.php';
         </div>
         <div class="authorImg">
           <h2>About Me</h2>  
-          <img src="img/profile.jpg" alt="Picture of Author" height="300" width="200">
+          <img src="img/profile.jpg" alt="Picture of Author" height="300" width="225">
           <p>Hey, my name is John Kyker and I'm the creator of this website! I'm a programming student with an interest in strategy games.</p>
         </div>
         
@@ -31,20 +31,19 @@ require_once 'view/header.php';
         <div class="col-sm-8">
           <h2>Latest News</h2>
           <h5>Local groups band together, March 23, 2020</h5>
-          <img src="img/gaming1.jpg" alt="Picture of young players" height="400" width="700">
+          <img src="img/gaming1.jpg" alt="Picture of young players" height="400" width="600">
           <p>Some local players have taken it upon themselves to give donations to and teach younger players.</p>
-          <p><a href="#">Learn More</a></p>
-          <br>
+          <br><br>
           <div class="leaderboard">
           <h2>Leaderboard</h2>
-          <h5>Top players</h5>
-          <table>
-            <li>Logan "boppmaster"</li>
-            <li>John "airborne17th"</li>
-          </table>
+          <h4>Top players</h4>
+          <ul>
+            <li>"If I don't win without styling on them I still consider it a loss." -Logan "boppmaster"</li>
+            <li>"Just have fun while being the best." -John "airborne17th"</li>
+          </ul>
           </div>
           <h2>Come Play!</h2>
-          <img src="img/cafe.jpg" alt="Picture of Cafe" height="400" width="700">
+          <img src="img/cafe.jpg" alt="Picture of Cafe" height="300" width="450">
           <p>
             Local play and tournaments are held here unless specified to a different location. Back room of the coffee shop in the expansion area. 
             Friendly games are held on Wedensday starting at 6PM. League matches are held on Saturday or Sunday on agreed upon times.
@@ -55,7 +54,6 @@ require_once 'view/header.php';
           800 P St<br>
           Lincoln, Nebraska 68508
           </p>
-          <p><a href="#">Learn More</a></p>
         </div>
       </div>
     </div>
